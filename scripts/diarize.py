@@ -9,7 +9,21 @@ assert AUTH_TOKEN is not None, "Please set your HuggingFace auth token"
 pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization",
                                     use_auth_token=AUTH_TOKEN)
 
-def diarize_audio(audio_path, out_dir=None, num_speakers=None, keep_turn=False, min_sec=0.5, max_sec=None):
+def diarize_audio(audio_path, out_dir=None, num_speakers=None, keep_turn=False, min_sec=0.5, max_sec=None) -> None:
+    """
+    Diarizes the given audio file, separating speakers into individual segments.
+
+    Args:
+        audio_path (str): Path to the audio file.
+        out_dir (str, optional): Output directory for saving the diarized audio segments. If not specified, the segments will be saved in the speaker's name as subdirectories. Defaults to None.
+        num_speakers (int, optional): Number of speakers to expect in the audio. Defaults to None.
+        keep_turn (bool, optional): Whether to keep the entire speaker turn or split it into smaller segments. Defaults to False.
+        min_sec (float, optional): Minimum duration (in seconds) for a segment to be considered valid. Segments shorter than this duration will be skipped. Defaults to 0.5.
+        max_sec (float, optional): Maximum duration (in seconds) for a segment to be considered valid. Segments longer than this duration will be skipped. Defaults to None.
+    
+    Returns:
+        None
+    """
     sr, audio = wavfile.read(audio_path)
     diarization = pipeline(audio_path, num_speakers=num_speakers)
     

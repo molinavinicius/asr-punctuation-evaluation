@@ -7,7 +7,16 @@ from tqdm import tqdm
 from glob import glob
 
 
-def downsample(wav_path):
+def downsample(wav_path) -> None:
+    """Downsample the audio file at the given path to the target sampling rate specified in the command-line arguments,
+    and save the result to a new file with the same relative path under the target directory.
+
+    Args:
+        wav_path (str): Path to the input WAV file.
+
+    Returns:
+        None
+    """
     if os.path.exists(wav_path):
         wav, _ = librosa.load(wav_path, sr=args.sr)
         wav, _ = librosa.effects.trim(wav, top_db=20)

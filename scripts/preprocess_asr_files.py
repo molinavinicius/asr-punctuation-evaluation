@@ -4,7 +4,21 @@ import re
 
 def preprocess_dir(input_dir, 
                    output_dir, 
-                   final_punctuation_marks=['.', '!', '?']):
+                   final_punctuation_marks=['.', '!', '?']) -> None:
+    """
+    Preprocesses text files in the input directory by removing line breaks, combining lines into paragraphs,
+    segmenting the text based on final punctuation marks, and saving the preprocessed files to the output directory.
+
+    Args:
+        input_dir (str): Path to the input directory containing text files to preprocess.
+        output_dir (str): Path to the output directory where preprocessed files will be saved.
+        final_punctuation_marks (list, optional): List of final punctuation marks used for text segmentation.
+            Use ".!?" to segment on sentences or ".!?,;:" to segment on any punctuation for punctuation analysis.
+            Defaults to ['.', '!', '?'].
+
+    Returns:
+        None
+    """
     for d in list(filter(lambda d: os.path.isdir(d), os.listdir())):
         os.makedirs(os.path.join(input_dir, d), exist_ok=True)
         files = list(filter(lambda f: f.endswith("txt"), os.listdir(d)))

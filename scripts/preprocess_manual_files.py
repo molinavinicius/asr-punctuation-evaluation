@@ -19,7 +19,24 @@ def preprocess_dir(input_dir,
                    final_punctuation_marks=['.', '!', '?'],
                    replace_in_quotes=None,
                    remove_quotes=True,
-                   split_on_quotes=False):
+                   split_on_quotes=False) -> None:
+    """
+    Preprocesses text files in the input directory by removing unwanted phrases, punctuation, and quotes,
+    and saves the preprocessed files to the output directory.
+
+    Args:
+        input_dir (str): Path to the input directory containing text files to preprocess.
+        output_dir (str): Path to the output directory where preprocessed files will be saved.
+        final_punctuation_marks (list, optional): List of final punctuation marks used for text segmentation.
+            Use ".!?" to segment on sentences or ".!?,;:" to segment on any punctuation for punctuation analysis.
+            Defaults to ['.', '!', '?'].
+        replace_in_quotes (str, optional): String to replace the content within quotes. Defaults to None.
+        remove_quotes (bool, optional): Whether to remove quotes from the text. Defaults to True.
+        split_on_quotes (bool, optional): Whether to split the text based on quotes. Defaults to False.
+
+    Returns:
+        None
+    """
     files = list(filter(lambda f: f.endswith("txt"), os.listdir(input_dir)))
     for f in files:
         output_path = os.path.join(output_dir, f.replace(".txt", ''))

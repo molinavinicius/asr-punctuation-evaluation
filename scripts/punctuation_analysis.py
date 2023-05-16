@@ -1,3 +1,25 @@
+"""
+This script takes as input one or more alignment files, each containing a set of aligned sentences. 
+For each sentence pair, the script compares the expected punctuation mark (i.e., the last character of the original sentence) 
+to the predicted punctuation mark (i.e., the last character of the transcribed sentence) and computes various performance metrics, 
+including precision, recall, and F1 scores, for each punctuation mark class (',', ';', '!', '?', '=', '.', ':'), 
+as well as for two aggregated classes ('pausing' and 'CI', where 'pausing' includes ',' ';', and ':' 
+and 'CI' includes '?', '!', and '.').
+The script writes the results to a CSV file specified by the user, and prints the performance metrics to the console. 
+
+The script uses the argparse module to parse command-line arguments, and the sklearn.metrics module to compute the F1 scores. 
+It also uses a dictionary called "summary" to keep track of the true positive (tp), true negative (tn), false positive (fp), 
+and false negative (fn) counts for each punctuation mark class.
+
+The script loops over each alignment file, reads in the file line by line, and processes each sentence pair in the file. 
+For each sentence pair, the script computes the expected and predicted punctuation marks, updates the summary dictionary, 
+and writes the results to the output CSV file.
+
+Finally, the script computes the F1 scores for each punctuation mark class and the aggregated classes, 
+and prints the results to the console.
+"""
+
+
 if __name__ == '__main__':
     import argparse
     from sklearn.metrics import f1_score
